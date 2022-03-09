@@ -8,7 +8,7 @@
 - name: Allow outgoing traffic
   community.general.ufw:
     direction: outgoing
-    policy: deny
+    policy: allow
 
 - name: Enabble firewall logging
   community.general.ufw:
