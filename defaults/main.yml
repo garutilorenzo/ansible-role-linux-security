@@ -1,12 +1,12 @@
 ---
 system_user: ubuntu
-sshd_permit_root_login: "no"
-sshd_pubkey_auth: "yes"
-sshd_password_auth: "no"
-sshd_challange_response_auth: "no"
-sshd_use_pam: "no"
-sshd_x11_forwarding: "no"
-sshd_print_motd: "no"
+sshd_permit_root_login: !!str no
+sshd_pubkey_auth: !!str yes
+sshd_password_auth: !!str no
+sshd_challange_response_auth: !!str no
+sshd_use_pam: !!str no
+sshd_x11_forwarding: !!str no
+sshd_print_motd: !!str no
 
 lock_user_accounts:
   no: "*"
