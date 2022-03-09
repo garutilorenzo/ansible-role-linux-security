@@ -1,0 +1,20 @@
+---
+- name: reload sshd block
+  block:
+    - name: reload sshd
+      service: 
+        name: sshd 
+        state: restarted 
+        enabled: yes
+  rescue:
+    - name: reload sshd
+      service: 
+        name: ssh 
+        state: restarted 
+        enabled: yes
+
+- name: reload fail2ban
+  service: 
+    name: fail2ban 
+    state: restarted 
+    enabled: yes

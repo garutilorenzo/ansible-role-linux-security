@@ -1,0 +1,46 @@
+---
+- setup:
+- include_tasks: 
+    file: auth.yml
+    apply:
+      tags: auth
+  tags: auth
+
+- include_tasks: 
+    file: authorized-keys.yml
+    apply:
+      tags: authorized-keys
+  tags: authorized-keys
+
+- include_tasks: 
+    file: sshd.yml
+    apply:
+      tags: sshd
+  tags: sshd
+
+- include_tasks: 
+    file: iptables-legacy.yml
+    apply:
+      tags: iptables-legacy
+  tags: iptables-legacy
+  when: 
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version is version('20.10', '>=')
+    - iptables_mode == 'iptables-legacy'
+
+- include_tasks: 
+    file: firewall-ufw.yml
+    apply:
+      tags: firewall-ufw
+  tags: firewall-ufw
+  when: 
+    - ansible_distribution == 'Ubuntu'
+    - iptables_type == 'ufw'
+    - enable_firewall
+
+- include_tasks: 
+    file: fail2ban.yml
+    apply:
+      tags: fail2ban
+  tags: fail2ban
+  when: install_fail2ban

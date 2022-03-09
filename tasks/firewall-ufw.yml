@@ -1,0 +1,27 @@
+---
+
+- name: Block incoming traffic
+  community.general.ufw:
+    direction: in
+    policy: deny
+
+- name: Allow outgoing traffic
+  community.general.ufw:
+    direction: out
+    policy: deny
+
+- name: Enabble firewall logging
+  community.general.ufw:
+    logging: 'on'
+
+- name: Allow and limit ssh connection
+  community.general.ufw:
+    rule: limit
+    direction: in
+    proto: tcp
+    src: "{{ ssh_allow_cidr|default('0.0.0.0/0') }}"
+    port: '22'
+
+- name: Enable ufw
+  community.general.ufw:
+    state: enabled

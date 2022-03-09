@@ -1,0 +1,38 @@
+---
+- name: check if fail2ban is in path
+  shell: which fail2ban-client
+  register: fail2ban
+  ignore_errors: yes
+
+- name: Install, Fail2ban
+  block:
+    - name: Update apt and install fail2ban
+      apt: 
+        update_cache: yes 
+        name: fail2ban 
+        state: latest
+
+    - name: copy fail2ban.service
+      copy:
+        src: fail2ban.service
+        dest: /etc/systemd/system/fail2ban.service
+        owner: root
+        group: root
+        mode: 0600
+
+    - name: reload systemd
+      systemd:
+        daemon_reload: yes
+  when:
+    fail2ban.rc != 0
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: copy fail2ban config
+  copy:
+    src: fail2ban/jail.local
+    dest: /etc/fail2ban/jail.local
+    owner: root
+    group: root
+    mode: 0600
+  notify:
+    - reload fail2ban

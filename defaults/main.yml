@@ -1,0 +1,22 @@
+---
+system_user: ubuntu
+sshd_permit_root_login: no
+sshd_pubkey_auth: yes
+sshd_password_auth: no
+sshd_challange_response_auth: no
+sshd_use_pam: no
+sshd_x11_forwarding: no
+sshd_print_motd: no
+
+lock_user_accounts:
+  no: "*"
+  yes: "!"
+
+ssh_keys: []
+ssh_allow_cidr: 0.0.0.0/0
+
+install_fail2ban: false
+
+enable_firewall: true
+iptables_mode: legacy
+iptables_type: ufw

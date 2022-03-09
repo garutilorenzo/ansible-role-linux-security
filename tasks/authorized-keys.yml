@@ -1,0 +1,9 @@
+---
+
+- name: Set ssh authorized key for system user
+  authorized_key:
+    user: "{{ system_user }}"
+    state: present
+    key: "{{ item }}"
+  with_items:
+    - "{{ ssh_keys }}"

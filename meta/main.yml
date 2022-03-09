@@ -1,0 +1,10 @@
+---
+dependencies: []
+
+galaxy_info:
+  description: 'Basic security setup for linux'
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+  galaxy_tags: []
