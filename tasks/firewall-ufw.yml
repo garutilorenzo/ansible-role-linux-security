@@ -2,12 +2,12 @@
 
 - name: Block incoming traffic
   community.general.ufw:
-    direction: in
+    direction: incoming
     policy: deny
 
 - name: Allow outgoing traffic
   community.general.ufw:
-    direction: out
+    direction: outgoing
     policy: deny
 
 - name: Enabble firewall logging
