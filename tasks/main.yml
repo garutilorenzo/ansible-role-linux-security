@@ -31,7 +31,7 @@
     apply:
       tags: firewall
   with_first_found:
-    - "firewall-{{ iptables_type[ansible_distribution] }}.yml"
+    - "firewall-{{ firewall_type[ansible_os_family] }}.yml"
   tags: firewall
   when: 
     - enable_firewall

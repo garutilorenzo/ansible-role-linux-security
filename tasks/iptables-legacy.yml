@@ -1,4 +1,11 @@
 ---
+
+- name: Install iptables-legacy
+  ansible.builtin.yum:
+    name: iptables-legacy
+    state: present
+  when: ansible_os_family == 'RedHat'
+
 - name: check iptables version
   shell: iptables --version
   register: iptables_version
