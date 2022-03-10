@@ -1,0 +1,28 @@
+---
+
+- name: Install Apache >= 2.4
+  ansible.builtin.yum:
+    name: firewalld
+    state: present
+
+- name: enable and start firewalld
+  ansible.builtin.systemd:
+    name: firewalld 
+    state: started 
+    enabled: yes
+
+- name: Allow and limit ssh connection
+  ansible.posix.firewalld:
+    rich_rule: rule family=ipv4 source address="{{ ssh_allow_cidr|default('0.0.0.0/0') }}" port port="22" protocol="tcp" limit value="10/m" accept
+    zone: public
+    permanent: yes
+    immediate: yes
+    state: enabled
+
+- name: Disable ssh service, use rich_rule
+  ansible.posix.firewalld:
+    zone: public
+    service: ssh
+    permanent: yes
+    state: disabled
+    immediate: yes
