@@ -15,10 +15,12 @@
     - community.general.alternatives:
         name: iptables
         path: /usr/sbin/iptables-legacy
+        link: /usr/sbin/iptables
 
     - community.general.alternatives:
         name: ip6tables
         path: /usr/sbin/ip6tables-legacy
+        link: /usr/sbin/ip6tables
 
     - ansible.builtin.reboot:
         msg: "Reboot initiated by Ansible for iptables-legacy"
