@@ -29,10 +29,12 @@
     - iptables_mode == 'iptables-legacy'
 
 - include_tasks: 
-    file: firewall-{{ iptables_type[ansible_distribution] }}.yml
+    file: "{{ item }}"
     apply:
-      tags: firewall-{{ iptables_type[ansible_distribution] }}
-  tags: firewall-{{ iptables_type[ansible_distribution] }}
+      tags: firewall
+  with_first_found:
+    - "firewall-{{ iptables_type[ansible_distribution] }}.yml"
+  tags: firewall
   when: 
     - enable_firewall
 

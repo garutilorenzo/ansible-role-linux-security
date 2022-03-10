@@ -20,7 +20,7 @@ install_fail2ban: false
 enable_firewall: true
 iptables_mode: legacy
 iptables_type: 
-  - Ubuntu: ufw
-  - RedHat: firewalld
-  - CentOS: firewalld
-  - Fedora: firewalld
+  Ubuntu: ufw
+  RedHat: firewalld
+  CentOS: firewalld
+  Fedora: firewalld
