@@ -1,7 +1,8 @@
 ---
 
 - name: Install iptables-legacy
-  ansible.builtin.yum:
+  ansible.builtin.package:
+    update_cache: yes 
     name: iptables-legacy
     state: present
   when: ansible_os_family == 'RedHat'

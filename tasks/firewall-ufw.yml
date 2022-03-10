@@ -28,6 +28,16 @@
     src: "{{ ssh_allow_cidr|default('0.0.0.0/0') }}"
     port: '22'
 
+- name: Custom ingress rules
+  community.general.ufw:
+    rule: "{{ item.rule|default('allow') }}"
+    direction: in
+    proto: "{{ item.proto }}"
+    src: "{{ item.src|default('0.0.0.0/0') }}"
+    port: "{{ item.port }}"
+  with_items: "{{ firewall_ingress_rules }}"
+  when: "{{ firewall_ingress_rules | length > 0 }}"
+
 - name: Enable ufw
   community.general.ufw:
     state: enabled
