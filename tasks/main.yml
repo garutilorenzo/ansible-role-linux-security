@@ -24,7 +24,7 @@
       tags: iptables-legacy
   tags: iptables-legacy
   when: 
-    - iptables_mode == 'iptables-legacy'
+    - iptables_mode == 'legacy'
 
 - include_tasks: 
     file: "{{ item }}"
