@@ -1,5 +1,11 @@
 ---
 
+- name: enable and start ufw
+  ansible.builtin.systemd: 
+    name: ufw 
+    state: started 
+    enabled: yes
+
 - name: Block incoming traffic
   community.general.ufw:
     direction: incoming

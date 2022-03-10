@@ -5,15 +5,15 @@
   ignore_errors: yes
 
 - block:  
-    - alternatives:
+    - community.general.alternatives:
         name: iptables
         path: /usr/sbin/iptables-legacy
 
-    - alternatives:
+    - community.general.alternatives:
         name: ip6tables
         path: /usr/sbin/ip6tables-legacy
 
-    - reboot:
+    - ansible.builtin.reboot:
         msg: "Reboot initiated by Ansible for iptables-legacy"
         connect_timeout: 5
         reboot_timeout: 300

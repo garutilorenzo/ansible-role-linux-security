@@ -1,4 +1,4 @@
 ---
 
 - name: remove password for system user
-  command: usermod -p '{{ lock_user_accounts[sshd_use_pam] }}' {{ system_user }}
+  ansible.builtin.command: usermod -p '{{ lock_user_accounts[sshd_use_pam] }}' {{ system_user }}

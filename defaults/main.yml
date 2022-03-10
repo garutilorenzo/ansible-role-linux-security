@@ -1,16 +1,16 @@
 ---
 system_user: ubuntu
-sshd_permit_root_login: "no"
-sshd_pubkey_auth: "yes"
-sshd_password_auth: "no"
-sshd_challange_response_auth: "no"
-sshd_use_pam: "no"
-sshd_x11_forwarding: "no"
-sshd_print_motd: "no"
+sshd_permit_root_login: false
+sshd_pubkey_auth: true
+sshd_password_auth: false
+sshd_challange_response_auth: false
+sshd_use_pam: false
+sshd_x11_forwarding: false
+sshd_print_motd: false
 
 lock_user_accounts:
-  "no": "*"
-  "yes": "!"
+  false: "*"
+  true: "!"
 
 ssh_keys: []
 ssh_allow_cidr: 0.0.0.0/0
@@ -19,4 +19,7 @@ install_fail2ban: false
 
 enable_firewall: true
 iptables_mode: legacy
-iptables_type: ufw
+iptables_type: 
+  - Ubuntu: ufw
+  - RedHat: firewalld
+  - CentOS: firewalld

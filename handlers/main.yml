@@ -2,19 +2,19 @@
 - name: reload sshd block
   block:
     - name: reload sshd
-      service: 
+      ansible.builtin.systemd: 
         name: sshd 
         state: restarted 
         enabled: yes
   rescue:
     - name: reload sshd
-      service: 
+      ansible.builtin.systemd:
         name: ssh 
         state: restarted 
         enabled: yes
 
 - name: reload fail2ban
-  service: 
+  ansible.builtin.systemd:
     name: fail2ban 
     state: restarted 
     enabled: yes

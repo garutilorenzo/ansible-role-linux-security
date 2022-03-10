@@ -29,13 +29,11 @@
     - iptables_mode == 'iptables-legacy'
 
 - include_tasks: 
-    file: firewall-ufw.yml
+    file: firewall-{{ iptables_type[ansible_distribution] }}.yml
     apply:
-      tags: firewall-ufw
-  tags: firewall-ufw
+      tags: firewall-{{ iptables_type[ansible_distribution] }}
+  tags: firewall-{{ iptables_type[ansible_distribution] }}
   when: 
-    - ansible_distribution == 'Ubuntu'
-    - iptables_type == 'ufw'
     - enable_firewall
 
 - include_tasks: 
