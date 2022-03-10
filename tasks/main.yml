@@ -24,8 +24,6 @@
       tags: iptables-legacy
   tags: iptables-legacy
   when: 
-    - ansible_distribution == 'Ubuntu'
-    - ansible_distribution_version is version('20.10', '>=')
     - iptables_mode == 'iptables-legacy'
 
 - include_tasks: 

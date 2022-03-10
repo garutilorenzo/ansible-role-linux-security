@@ -1,6 +1,6 @@
 ---
 
-- name: Install Apache >= 2.4
+- name: Install firewalld
   ansible.builtin.yum:
     name: firewalld
     state: present
