@@ -18,3 +18,9 @@
     name: fail2ban 
     state: restarted 
     enabled: yes
+
+- name: reload iptables-docker
+  ansible.builtin.service:
+    name: iptables-docker
+    state: restarted
+    enabled: yes

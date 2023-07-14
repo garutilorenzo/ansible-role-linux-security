@@ -2,7 +2,7 @@
 - name: check if fail2ban is in path
   ansible.builtin.shell: which fail2ban-client
   register: fail2ban
-  ignore_errors: yes
+  ignore_errors: true
 
 - name: Install, Fail2ban
   block:

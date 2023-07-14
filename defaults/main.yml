@@ -1,5 +1,7 @@
 ---
 system_user: ubuntu
+
+# SSH
 sshd_permit_root_login: false
 sshd_pubkey_auth: true
 sshd_password_auth: false
@@ -13,13 +15,22 @@ lock_user_accounts:
   true: "!"
 
 ssh_keys: []
-ssh_allow_cidr: 0.0.0.0/0
 
 install_fail2ban: false
 
+# Firewall configs
 enable_firewall: true
 iptables_mode: legacy
 firewall_type: 
   Debian: ufw
   RedHat: firewalld
-firewall_ingress_rules: [] 
+firewall_ingress_rules: []
+ssh_allow_cidr: 0.0.0.0/0
+
+docker_preserve: false
+swarm_enabled: false
+ebable_icmp_messages: true
+swarm_cidr: 192.168.1.0/24
+firewall_services:
+  - ufw
+  - firewalld

@@ -19,7 +19,7 @@
     immediate: yes
     state: enabled
 
-- name: Custom ingress rules
+- name: Custom ingress rules (port)
   ansible.posix.firewalld:
     rich_rule: rule family="{{ firewall_item.family|default('ipv4') }}" source address="{{ firewall_item.src|default('0.0.0.0/0') }}" port port="{{ firewall_item.port }}" protocol="{{ firewall_item.proto }}" accept
     zone: public
@@ -29,7 +29,23 @@
   with_items: "{{ firewall_ingress_rules }}"
   loop_control:
     loop_var: firewall_item
-  when: firewall_ingress_rules | length > 0
+  when: 
+    - firewall_ingress_rules | length > 0
+    - firewall_item.port is defined
+
+- name: Custom ingress rules (open all ports)
+  ansible.posix.firewalld:
+    rich_rule: rule family="{{ firewall_item.family|default('ipv4') }}" source address="{{ firewall_item.src|default('0.0.0.0/0') }}" protocol="{{ firewall_item.proto }}" accept
+    zone: public
+    permanent: yes
+    immediate: yes
+    state: enabled
+  with_items: "{{ firewall_ingress_rules }}"
+  loop_control:
+    loop_var: firewall_item
+  when: 
+    - firewall_ingress_rules | length > 0
+    - firewall_item.port is not defined
 
 - name: Disable ssh service, use rich_rule
   ansible.posix.firewalld:

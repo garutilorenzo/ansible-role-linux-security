@@ -28,7 +28,7 @@
     src: "{{ ssh_allow_cidr|default('0.0.0.0/0') }}"
     port: '22'
 
-- name: Custom ingress rules
+- name: Custom ingress rules (port)
   community.general.ufw:
     rule: "{{ firewall_item.rule|default('allow') }}"
     direction: in
@@ -38,7 +38,22 @@
   with_items: "{{ firewall_ingress_rules }}"
   loop_control:
     loop_var: firewall_item
-  when: firewall_ingress_rules | length > 0
+  when: 
+    - firewall_ingress_rules | length > 0
+    - firewall_item.port is defined
+
+- name: Custom ingress rules (open all ports)
+  community.general.ufw:
+    rule: "{{ firewall_item.rule|default('allow') }}"
+    direction: in
+    proto: "{{ firewall_item.proto }}"
+    src: "{{ firewall_item.src|default('0.0.0.0/0') }}"
+  with_items: "{{ firewall_ingress_rules }}"
+  loop_control:
+    loop_var: firewall_item
+  when: 
+    - firewall_ingress_rules | length > 0
+    - firewall_item.port is not defined
 
 - name: Enable ufw
   community.general.ufw:
