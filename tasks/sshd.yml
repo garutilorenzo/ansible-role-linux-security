@@ -1,5 +1,17 @@
 ---
 
+- name: "Find sftp-server path"
+  ansible.builtin.find:
+    paths: "/usr"
+    patterns: "sftp-server"
+    recurse: yes
+    file_type: "file"
+  register: search_sftp_path
+
+- name: Set sftp-server fact
+  ansible.builtin.set_fact:
+    sftp_path: "{{ search_sftp_path.files[0].path }}"
+
 - name: copy sshd_config scripts
   ansible.builtin.template:
     src: sshd_config.j2

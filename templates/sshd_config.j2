@@ -113,7 +113,7 @@ PrintMotd {{ 'yes' if sshd_print_motd else 'no' }}
 AcceptEnv LANG LC_*
 
 # override default of no subsystems
-Subsystem sftp  /usr/lib/openssh/sftp-server
+Subsystem sftp  {{ sftp_path }}
 
 # Example of overriding settings on a per-user basis
 #Match User anoncvs
