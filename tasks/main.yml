@@ -1,5 +1,10 @@
 ---
+
 - setup:
+
+- name: Populate service facts
+  ansible.builtin.service_facts:
+
 - include_tasks: 
     file: auth.yml
     apply:
@@ -35,6 +40,16 @@
   tags: firewall
   when: 
     - enable_firewall
+    - not docker_preserve
+
+- include_tasks: 
+    file: firewall-docker.yml
+    apply:
+      tags: firewall,preserve
+  tags: firewall,preserve
+  when:
+    - enable_firewall
+    - docker_preserve
 
 - include_tasks: 
     file: fail2ban.yml

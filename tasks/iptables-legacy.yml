@@ -8,9 +8,9 @@
   when: ansible_os_family == 'RedHat'
 
 - name: check iptables version
-  shell: iptables --version
+  ansible.builtin.shell: iptables --version
   register: iptables_version
-  ignore_errors: yes
+  ignore_errors: true
 
 - block:  
     - community.general.alternatives:
