@@ -5,7 +5,7 @@
 
 # Basic ansible role for Linux security
 
-Ansible role used to configure basic security for Linux servers
+Ansible role used to configure basic security (iptables, sshd, fail2ban) for Linux servers
 
 ## Requirements
 
@@ -29,7 +29,7 @@ This role accept this variables:
 | `sshd_use_pam`       | `no`       | `false`       | Set the value of UsePAM, disable authentication via PAM by default  |
 | `sshd_x11_forwarding`       | `no`       | `false`       | Set the value of X11Forwarding, disable X11 forwardning by dafault  |
 | `sshd_print_motd`       | `no`       | `false`       |  Set the value of PrintMotd, Motd disabled by default  |
-| `ssh_keys`       | `no`       | `[]`       |  List of public ssh keyhs to enable.  |
+| `ssh_keys`       | `no`       | `[]`       |  List of public ssh keys to be enabled for the `system user`.  |
 | `install_fail2ban`       | `no`       | `false`       |  Install and configure fail2ban (ssh jail) |
 | `enable_firewall`       | `no`       | `true`       |  Enable and configure firewall |
 | `iptables_mode`       | `no`       | `legacy`       |  Define the iptables mode: legacy or nfables |
