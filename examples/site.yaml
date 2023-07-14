@@ -1,0 +1,8 @@
+---
+- hosts: servers
+  become: yes
+  remote_user: ubuntu
+  roles: 
+    - role: ansible-role-linux-security
+  vars_files:
+    - vars.yaml
