@@ -36,3 +36,9 @@
     mode: 0600
   notify:
     - reload fail2ban
+
+- name: reload fail2ban
+  ansible.builtin.systemd:
+    name: fail2ban 
+    state: started 
+    enabled: yes
